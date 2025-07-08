@@ -18,11 +18,11 @@ public class userServiceImpl implements userService{
     @Autowired
     private UserRepo userRepository;
 
-    @Autowired
-    jwtServiceImpl jwtService;
+//    @Autowired
+//    jwtServiceImpl jwtService;
 
-    @Autowired
-    AuthenticationManager authManager;
+//    @Autowired
+//    AuthenticationManager authManager;
 
     @Override
     public List<User> getUsers() {
@@ -39,12 +39,12 @@ public class userServiceImpl implements userService{
         return userRepository.findById(id);
     }
 
-    @Override
-    public String verify(User user) {
-        Authentication authentication =
-                authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-        if(authentication.isAuthenticated())
-            return jwtService.generateToken();
-        return "Failed";
-    }
+//    @Override
+//    public String verify(User user) {
+//        Authentication authentication =
+//                authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+//        if(authentication.isAuthenticated())
+//            return jwtService.generateToken();
+//        return "Failed";
+//    }
 }

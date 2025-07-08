@@ -15,6 +15,6 @@ public interface userService{
 
     Optional<User> getUserById(Integer id);
 
-    String verify(User user);
+//    String verify(User user);
 
 }
