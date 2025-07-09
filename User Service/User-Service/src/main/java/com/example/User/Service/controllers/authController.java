@@ -45,12 +45,6 @@ public class authController {
         }
 
         User theUser = userRepo.findByEmail(user.getEmail());
-//
-//        System.out.println("Email : " + user.getEmail());
-//        System.out.println("Password : " + user.getPassword());
-//        System.out.println("==================================");
-//        System.out.println("Email : " + theUser.getEmail());
-//        System.out.println("Password : " + theUser.getPassword());
 
         if(!passwordEncoder.matches(user.getPassword(), theUser.getPassword())){
 
@@ -62,13 +56,13 @@ public class authController {
 
         //CookieUtil.addCookie(response, JwtUtil.TOKEN_NAME, token); //Storing JWT in cookie
 
-        redisUtil.saveToken(theUser.getEmail(), token); //Storing JWT in Redis
+        redisUtil.saveToken(token, token); //Storing JWT in Redis
 
 
 
         //return new ResponseEntity<>(user, org.springframework.http.HttpStatus.OK);
 
-        return ResponseEntity.ok("Session ID = " + theUser.getEmail());
+        return ResponseEntity.ok("Session ID = " + "Bearer "+ token);
 
 
 

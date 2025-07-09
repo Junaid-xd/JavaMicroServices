@@ -1,6 +1,8 @@
 package com.example.User.Service.DTO;
 
-public class OrderDTO {
+
+public class OrderDTO{
+
     private Integer userID;
     private String itemName;
     private Double totalAmount;

@@ -89,7 +89,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        // You can also extract username and set authentication if needed
+
         UsernamePasswordAuthenticationToken authentication =
                 new UsernamePasswordAuthenticationToken(sessionId, null, null);
 
@@ -103,6 +103,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     private boolean isExcludedPath(String path) {
-        return path.startsWith("/login");
+        return path.startsWith("/login") || path.startsWith("/users/createUser");
     }
+
 }

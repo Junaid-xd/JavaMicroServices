@@ -4,6 +4,7 @@ package com.example.User.Service.controllers;
 import com.example.User.Service.DTO.OrderDTO;
 import com.example.User.Service.Feign.UserInterface;
 import com.example.User.Service.Models.User;
+import com.example.User.Service.services.RabbitMQSender;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,6 +25,9 @@ public class userController {
 
     @Autowired
     private UserInterface userInterface;
+
+    @Autowired
+    private RabbitMQSender rabbitMQSender;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
@@ -60,7 +64,10 @@ public class userController {
 
     @PostMapping("/createOrder")
     public ResponseEntity<?> createOrder(@RequestBody OrderDTO order){
-        return userInterface.createOrder(order);
+        //return userInterface.createOrder(order);
+
+       rabbitMQSender.send(order);
+       return ResponseEntity.ok("Order message sent to RabbitMQ successfully.");
     }
 
     @GetMapping("/getOrdersByUserID/{id}")
